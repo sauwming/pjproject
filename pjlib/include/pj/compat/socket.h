@@ -179,10 +179,16 @@
 
 /*
  * And undefine these..
+ * Note (see issue #2311): unfortunately, this may cause build failure
+ * to anyone who uses these standard macros.
  */
-// #undef s_addr
-#undef s6_addr
+//#undef s_addr
+//#undef s6_addr
 #undef sin_zero
+
+#ifndef s6_addr32
+#   define s6_addr32 __u6_addr.__u6_addr32
+#endif
 
 /*
  * This will finally be obsoleted, since it should be declared in

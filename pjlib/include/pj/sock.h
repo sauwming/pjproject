@@ -545,6 +545,11 @@ struct pj_sockaddr_in
 };
 
 
+/* Undefining C standard library macro such as s6_addr is not
+ * recommended as it may cause build issues for anyone who uses
+ * the macro. See #2311 for more details.
+ */
+#if 0
 #undef s6_addr
 
 /**
@@ -569,6 +574,9 @@ typedef union pj_in6_addr
 #endif
 
 } pj_in6_addr;
+#else
+typedef struct in6_addr pj_in6_addr;
+#endif
 
 
 /** Initializer value for pj_in6_addr. */
