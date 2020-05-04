@@ -184,11 +184,7 @@
  */
 //#undef s_addr
 //#undef s6_addr
-#undef sin_zero
-
-#ifndef s6_addr32
-#   define s6_addr32 __u6_addr.__u6_addr32
-#endif
+//#undef sin_zero
 
 /*
  * This will finally be obsoleted, since it should be declared in
