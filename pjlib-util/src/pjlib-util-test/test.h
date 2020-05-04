@@ -23,7 +23,7 @@
 #define INCLUDE_JSON_TEST	    1
 #define INCLUDE_ENCRYPTION_TEST	    1
 #define INCLUDE_STUN_TEST	    1
-#define INCLUDE_RESOLVER_TEST	    1
+#define INCLUDE_RESOLVER_TEST	    0
 #define INCLUDE_HTTP_CLIENT_TEST    1
 
 extern int xml_test(void);

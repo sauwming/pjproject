@@ -31,7 +31,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////
-
+#if 0
 
 #define ACTION_REPLY	0
 #define ACTION_IGNORE	-1
@@ -1968,3 +1968,4 @@ on_error:
     return rc;
 }
 
+#endif
