@@ -987,11 +987,11 @@ PJ_DEF(pj_status_t) pj_gethostip(int af, pj_sockaddr *addr)
 	if (af==PJ_AF_INET) {
 	    addr->ipv4.sin_addr.s_addr = pj_htonl (0x7f000001);
 	} else {
-	    pj_in6_addr *s6_addr;
+	    pj_in6_addr *s6_addr_;
 
-	    s6_addr = (pj_in6_addr*) pj_sockaddr_get_addr(addr);
-	    pj_bzero(s6_addr, sizeof(pj_in6_addr));
-	    s6_addr->s6_addr[15] = 1;
+	    s6_addr_ = (pj_in6_addr*) pj_sockaddr_get_addr(addr);
+	    pj_bzero(s6_addr_, sizeof(pj_in6_addr));
+	    s6_addr_->s6_addr[15] = 1;
 	}
 	TRACE_((THIS_FILE, "Loopback IP %s returned",
 		pj_sockaddr_print(addr, strip, sizeof(strip), 3)));

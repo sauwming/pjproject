@@ -767,7 +767,7 @@ static int addr_parser_test(void)
     pkt.ans[3].type = PJ_DNS_TYPE_AAAA;
     pkt.ans[3].dnsclass = 1;
     pkt.ans[3].ttl = 1;
-    pkt.ans[3].rdata.aaaa.ip_addr.u6_addr32[0] = 0x01020304;
+    pkt.ans[3].rdata.aaaa.ip_addr.s6_addr32[0] = 0x01020304;
 
 
     rc = pj_dns_parse_addr_response(&pkt, &rec);
@@ -776,7 +776,7 @@ static int addr_parser_test(void)
     pj_assert(rec.alias.slen == 0);
     pj_assert(rec.addr_count == 2);
     pj_assert(rec.addr[0].af==pj_AF_INET() && rec.addr[0].ip.v4.s_addr == 0x01020304);
-    pj_assert(rec.addr[1].af==pj_AF_INET6() && rec.addr[1].ip.v6.u6_addr32[0] == 0x01020304);
+    pj_assert(rec.addr[1].af==pj_AF_INET6() && rec.addr[1].ip.v6.s6_addr32[0] == 0x01020304);
 
     /* Answer with the target corresponds to a CNAME entry, but not
      * as the first record, and with additions of some CNAME and A
@@ -1256,10 +1256,10 @@ static void action1_1(const pj_dns_parsed_packet *pkt,
 	res->ans[1].dnsclass = 1;
 	res->ans[1].ttl = 1;
 	res->ans[1].name = pj_str(alias);
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[0] = IP_ADDR1;
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[1] = IP_ADDR1;
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[2] = IP_ADDR1;
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[3] = IP_ADDR1;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[0] = IP_ADDR1;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[1] = IP_ADDR1;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[2] = IP_ADDR1;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[3] = IP_ADDR1;
     }
 
     *p_res = res;
@@ -1329,7 +1329,7 @@ static void srv_cb_1c(void *user_data,
     PJ_ASSERT_ON_FAIL(rec->entry[0].server.addr[0].af == pj_AF_INET() &&
 		      rec->entry[0].server.addr[0].ip.v4.s_addr == IP_ADDR1, return);
     PJ_ASSERT_ON_FAIL(rec->entry[0].server.addr[1].af == pj_AF_INET6() &&
-		      rec->entry[0].server.addr[1].ip.v6.u6_addr32[0] == IP_ADDR1, return);
+		      rec->entry[0].server.addr[1].ip.v6.s6_addr32[0] == IP_ADDR1, return);
 }
 
 
@@ -1355,7 +1355,7 @@ static void srv_cb_1d(void *user_data,
     /* IPv6 only */
     PJ_ASSERT_ON_FAIL(rec->entry[0].server.addr_count == 1, return);
     PJ_ASSERT_ON_FAIL(rec->entry[0].server.addr[0].af == pj_AF_INET6() &&
-		      rec->entry[0].server.addr[0].ip.v6.u6_addr32[0] == IP_ADDR1, return);
+		      rec->entry[0].server.addr[0].ip.v6.s6_addr32[0] == IP_ADDR1, return);
 }
 
 
@@ -1544,10 +1544,10 @@ static void action2_1(const pj_dns_parsed_packet *pkt,
 	res->ans[1].dnsclass = 1;
 	res->ans[1].ttl = 1;
 	res->ans[1].name = pj_str(alias);
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[0] = IP_ADDR2;
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[1] = IP_ADDR2;
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[2] = IP_ADDR2;
-	res->ans[1].rdata.aaaa.ip_addr.u6_addr32[3] = IP_ADDR2;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[0] = IP_ADDR2;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[1] = IP_ADDR2;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[2] = IP_ADDR2;
+	res->ans[1].rdata.aaaa.ip_addr.s6_addr32[3] = IP_ADDR2;
     }
 
     *p_res = res;
