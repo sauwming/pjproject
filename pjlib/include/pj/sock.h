@@ -488,7 +488,7 @@ typedef enum pj_socket_sd_type
  * recommended as it may cause build issues for anyone who uses
  * the macro. See #2311 for more details.
  */
-#if (defined(PJ_WIN32) && PJ_WIN32) || (defined(PJ_WIN64) && PJ_WIN64)
+#if 0
 /* Must undefine s_addr because of pj_in_addr below */
 #undef s_addr
 

@@ -180,7 +180,7 @@
 /*
  * And undefine these..
  */
-#undef s_addr
+// #undef s_addr
 #undef s6_addr
 #undef sin_zero
 
