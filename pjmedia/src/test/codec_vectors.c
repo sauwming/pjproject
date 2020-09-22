@@ -222,7 +222,7 @@ static int read_ITU_format(FILE  *fp_bitstream,
 			   pj_bool_t swap_endian)
 {
     enum { MAX_BITS_PER_FRAME = 160*8 };
-    short i,j;
+    int i,j;
     short nsamp;
     short packed_word;
     short bit_count;
@@ -245,7 +245,7 @@ static int read_ITU_format(FILE  *fp_bitstream,
         /* increment j to skip over the number of bits in frame */
         j++;
 
-        for (i=0; i<(short)number_of_16bit_words_per_frame; i++) {
+        for (i=0; i<number_of_16bit_words_per_frame; i++) {
             packed_word = 0;
             bit_count = 15;
             while (bit_count >= 0) {
