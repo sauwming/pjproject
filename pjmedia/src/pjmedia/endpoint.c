@@ -802,14 +802,14 @@ PJ_DEF(pj_status_t) pjmedia_endpt_create_video_sdp(pjmedia_endpt *endpt,
 	if (codec_param.dec_fmtp.cnt > 0) {
 	    enum { MAX_FMTP_STR_LEN = 160 };
 	    char buf[MAX_FMTP_STR_LEN];
-	    unsigned buf_len = 0, j;
+	    unsigned buf_len = 0, n, j;
 	    pjmedia_codec_fmtp *dec_fmtp = &codec_param.dec_fmtp;
 
 	    /* Print codec PT */
-	    buf_len += pj_ansi_snprintf(buf, 
-					MAX_FMTP_STR_LEN - buf_len, 
-					"%d", 
-					codec_info[i].pt);
+	    n = pj_ansi_snprintf(buf, MAX_FMTP_STR_LEN - buf_len, 
+				 "%d", 
+				 codec_info[i].pt);
+	    buf_len = PJ_MIN(buf_len + n, MAX_FMTP_STR_LEN);
 
 	    for (j = 0; j < dec_fmtp->cnt; ++j) {
 		pj_size_t test_len = 2;
@@ -821,26 +821,28 @@ PJ_DEF(pj_status_t) pjmedia_endpt_create_video_sdp(pjmedia_endpt *endpt,
 		    return PJ_ETOOBIG;
 
 		/* Print delimiter */
-		buf_len += pj_ansi_snprintf(&buf[buf_len], 
-					    MAX_FMTP_STR_LEN - buf_len,
-					    (j == 0?" ":";"));
+		n = pj_ansi_snprintf(&buf[buf_len], 
+				     MAX_FMTP_STR_LEN - buf_len,
+				     (j == 0?" ":";"));
+	    	buf_len = PJ_MIN(buf_len + n, MAX_FMTP_STR_LEN);
 
 		/* Print an fmtp param */
 		if (dec_fmtp->param[j].name.slen)
-		    buf_len += pj_ansi_snprintf(
-					    &buf[buf_len],
-					    MAX_FMTP_STR_LEN - buf_len,
-					    "%.*s=%.*s",
-					    (int)dec_fmtp->param[j].name.slen,
-					    dec_fmtp->param[j].name.ptr,
-					    (int)dec_fmtp->param[j].val.slen,
-					    dec_fmtp->param[j].val.ptr);
+		    n = pj_ansi_snprintf(&buf[buf_len],
+					 MAX_FMTP_STR_LEN - buf_len,
+					 "%.*s=%.*s",
+					 (int)dec_fmtp->param[j].name.slen,
+					 dec_fmtp->param[j].name.ptr,
+					 (int)dec_fmtp->param[j].val.slen,
+					 dec_fmtp->param[j].val.ptr);
 		else
-		    buf_len += pj_ansi_snprintf(&buf[buf_len], 
-					    MAX_FMTP_STR_LEN - buf_len,
-					    "%.*s", 
-					    (int)dec_fmtp->param[j].val.slen,
-					    dec_fmtp->param[j].val.ptr);
+		    n = pj_ansi_snprintf(&buf[buf_len], 
+					 MAX_FMTP_STR_LEN - buf_len,
+					 "%.*s", 
+					 (int)dec_fmtp->param[j].val.slen,
+					 dec_fmtp->param[j].val.ptr);
+		
+		buf_len = PJ_MIN(buf_len + n, MAX_FMTP_STR_LEN);
 	    }
 
 	    attr = PJ_POOL_ZALLOC_T(pool, pjmedia_sdp_attr);
