@@ -59,13 +59,8 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
     - run: |
-       ./configure
-       make -C pjlib/build
-       make -C pjlib-util/build
-       make -C pjnath/build
-       make -C pjmedia/build
-       make -C pjsip/build
-       make -C pjsip-apps/build
+       ./configure --disable-libyuv --disable-webrtc --disable-speex-codec --disable-speex-aec
+       make
        rm tests/pjsua/inc_cfg.py
 
     - name: Perform CodeQL Analysis
