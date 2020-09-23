@@ -1,2 +1,2 @@
-paths-ignore: 
-  - 'tests/pjsua/inc_cfg.py'
+#paths-ignore: 
+#  - 'tests/pjsua/inc_cfg.py'
