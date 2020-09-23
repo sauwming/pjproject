@@ -59,7 +59,7 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
     - run: |
-       ./configure --disable-libyuv --disable-webrtc --disable-speex-codec --disable-speex-aec
+       ./configure --disable-libyuv --disable-libwebrtc --disable-speex-codec --disable-speex-aec
        make
        rm tests/pjsua/inc_cfg.py
 
