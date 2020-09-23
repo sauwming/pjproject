@@ -59,6 +59,7 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
     - run: |
+       configure
        make -C pjlib/build
        make -C pjlib-util/build
        make -C pjnath/build
