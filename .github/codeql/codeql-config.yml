@@ -1,3 +1,2 @@
 paths-ignore: 
-  - third_party
-  
+  - 'tests/pjsua/inc_cfg.py'
